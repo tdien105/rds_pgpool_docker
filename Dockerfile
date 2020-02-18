@@ -25,7 +25,7 @@ RUN mkdir -p /var/run/pgpool && \
     chmod -R 777 /var/run/pgpool && \
     chmod -R 777 /var/run/pgpool
 
-COPY COPY docker-entrypoint.sh /usr/local/bin/
+COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 9999
