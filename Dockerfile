@@ -42,6 +42,6 @@ EXPOSE 9000
 WORKDIR /usr/local/bin
 COPY docker-entrypoint.sh /usr/local/bin
 RUN chmod 777 ./docker-entrypoint.sh
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+
 
 CMD ["pgpool", "-n", "-D"]
