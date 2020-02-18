@@ -30,12 +30,6 @@ RUN mkdir -p /var/log/pgpool
 RUN chmod -R 777 /var/run/pgpool 
 RUN chmod -R 777 /var/run/pgpool
 
-ENV MASTER_NODE_PORT 5432
-ENV REPLICA_NODE_PORT 5432
-ENV DB_NAME postgres
-ENV DB_USERNAME postgres
-ENV DB_PASSWORD postgres
-
 EXPOSE 9999
 EXPOSE 9000
 
