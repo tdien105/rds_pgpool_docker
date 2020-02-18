@@ -1,25 +1,25 @@
 FROM ubuntu:18.04
 MAINTAINER melvinkcx at gmail dot com
 
+ENV PGPOOL_VERSION 4.1.0
+
 # Fix timezone issue, see: https://bugs.launchpad.net/ubuntu/+source/tzdata/+bug/1554806
 RUN ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime
 # RUN dpkg-reconfigure -f noninteractive tzdata
 
 RUN apt update --fix-missing
-RUN apt install -y postgresql postgresql-server-dev-10 build-essential curl python-pip psmisc
-
-RUN pip install awscli
+RUN apt install -y postgresql postgresql-server-dev-10 build-essential curl libmemcached-dev
 
 WORKDIR /tmp
-RUN curl -L -o pgpool-II-4.0.6.tar.gz http://www.pgpool.net/download.php?f=pgpool-II-4.0.6.tar.gz
-RUN tar xf pgpool-II-4.0.6.tar.gz
+RUN curl -L -o pgpool-II-$PGPOOL_VERSION.tar.gz http://www.pgpool.net/download.php?f=pgpool-II-$PGPOOL_VERSION.tar.gz
+RUN tar xf pgpool-II-$PGPOOL_VERSION.tar.gz
 
-WORKDIR /tmp/pgpool-II-4.0.6
-RUN ./configure
+WORKDIR /tmp/pgpool-II-$PGPOOL_VERSION
+RUN ./configure --with-memcached=/usr/include/libmemcached-1.0
 RUN make
 RUN make install
 
-WORKDIR /tmp/pgpool-II-4.0.6/src/sql
+WORKDIR /tmp/pgpool-II-$PGPOOL_VERSION/src/sql
 RUN make
 RUN make install
 
