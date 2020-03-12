@@ -1,7 +1,8 @@
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 MAINTAINER melvinkcx at gmail dot com
 WORKDIR /app
 ENV PGPOOL_VERSION 3.7.13
+ENV PG_VERSION 9.6.17
 
 # Fix timezone issue, see: https://bugs.launchpad.net/ubuntu/+source/tzdata/+bug/1554806
 RUN ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime
@@ -25,11 +26,7 @@ RUN mkdir -p /var/run/pgpool && \
     chmod -R 777 /var/run/pgpool && \
     chmod -R 777 /var/run/pgpool
 
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-
 EXPOSE 9999
 EXPOSE 9000
 
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-CMD ["pgpool", "-n", "-D"]
+CMD ["/usr/local/bin/pgpool", "-n", "-D"]
