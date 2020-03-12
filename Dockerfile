@@ -1,12 +1,12 @@
 FROM ubuntu:18.04
 MAINTAINER melvinkcx at gmail dot com
 WORKDIR /app
-ENV PGPOOL_VERSION 4.1.0
+ENV PGPOOL_VERSION 3.7.13
 
 # Fix timezone issue, see: https://bugs.launchpad.net/ubuntu/+source/tzdata/+bug/1554806
 RUN ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime
 RUN apt update --fix-missing
-RUN apt install -y postgresql postgresql-server-dev-10 build-essential curl libmemcached-dev
+RUN apt install -y postgresql postgresql-server-dev-10 build-essential curl libmemcached-dev libpgpool0
 
 RUN curl -L -o pgpool-II-$PGPOOL_VERSION.tar.gz http://www.pgpool.net/download.php?f=pgpool-II-$PGPOOL_VERSION.tar.gz
 RUN tar xf pgpool-II-$PGPOOL_VERSION.tar.gz
