@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-MAINTAINER melvinkcx at gmail dot com
+MAINTAINER dienpt
 WORKDIR /app
 ENV PGPOOL_VERSION 3.7.13
 ENV PG_VERSION 9.6
